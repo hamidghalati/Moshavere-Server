@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Moshavere.Common\Moshavere.Common.csproj" />
+    <ProjectReference Include="..\Moshavere.Data\Moshavere.Data.csproj" />
+    <ProjectReference Include="..\Moshavere.Repo\Moshavere.Repo.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<ProjectRefrence Include="..\Moshavere.Repo\Moshavere.Repo.cs.proj"></ProjectRefrence>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Api\" />
+	  <Folder Include="Site\App\" />
+	</ItemGroup>
+
+</Project>

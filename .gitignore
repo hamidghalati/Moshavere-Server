@@ -1,0 +1,11 @@
+.vs
+Moshavere.Common/bin
+Moshavere.Common/obj
+Moshavere.Data/bin
+Moshavere.Data/obj
+Moshavere.Presentation/bin
+Moshavere.Presentation/obj
+Moshavere.Repo/bin
+Moshavere.Repo/obj
+Moshavere.Services/bin
+Moshavere.Services/obj
