@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Moshavere.Data.DataBaseContext;
 using Moshavere.Repo.Infrastructure;
 using Moshavere.Services.Site.Admin.Interface;
@@ -33,6 +36,17 @@ namespace Moshavere.Presentation
                 .AddNewtonsoftJson();
             services.AddScoped<IUnitOfWork<MoshavereDbContext>, UnitOfWork<MoshavereDbContext>>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
 
         }
 
@@ -50,8 +64,10 @@ namespace Moshavere.Presentation
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors(p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

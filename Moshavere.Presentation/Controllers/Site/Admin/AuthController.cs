@@ -21,7 +21,7 @@ using Moshavere.Services.Site.Admin.Service;
 namespace Moshavere.Presentation.Controllers.Site.Admin
 {
     [Authorize]
-    [Route("Site/admin/[controller]")]
+    [Route("MehrAvaran/admin/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
