@@ -108,5 +108,26 @@ namespace Moshavere.Presentation.Controllers.Site.Admin
             });
         }
 
+        // GET api/values
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<string>>> Get()
+        {
+            var user = new User()
+            {
+                Address = "شیراز",
+                City = "",
+                Name = "حمیدرضا سمیعی نیا",
+                UserName = "hamidghalati",
+                PhoneNumber = "09351360402",
+                IsActive = true,
+                PasswordHash = new byte[] { 0x20, 0x20, 0x20, 0x20 },
+                PasswordSalt = new byte[] { 0x20, 0x20, 0x20, 0x20 }
+
+            };
+            var u = await _authService.Register(user, "hamid2311");
+
+            return Ok(u);
+        }
+
     }
 }
